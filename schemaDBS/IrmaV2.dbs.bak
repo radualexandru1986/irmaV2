@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MyDb" id="Project_551" database="MySql" >
+	<schema name="irmav2" >
+		<table name="companies" >
+			<column name="id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_companies_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="container_shift" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="shift_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="container_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<index name="pk_container_shift" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_container_shift_containers" to_schema="irmav2" to_table="containers" >
+				<fk_column name="container_id" pk="id" />
+			</fk>
+			<fk name="fk_container_shift_shifts" to_schema="irmav2" to_table="shifts" >
+				<fk_column name="shift_id" pk="id" />
+			</fk>
+		</table>
+		<table name="containers" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="module_date" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="rota_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<index name="pk_containers" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_containers_rotas" to_schema="irmav2" to_table="rotas" >
+				<fk_column name="rota_id" pk="id" />
+			</fk>
+		</table>
+		<table name="contracts" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<column name="location_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_contracts" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_contracts_locations" to_schema="irmav2" to_table="locations" >
+				<fk_column name="location_id" pk="id" />
+			</fk>
+		</table>
+		<table name="departments" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="description" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<column name="location_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_departments" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_departments_locations" to_schema="irmav2" to_table="locations" >
+				<fk_column name="location_id" pk="id" />
+			</fk>
+		</table>
+		<table name="employees" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="user_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="department_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="contract_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<column name="location_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_employees" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_employees_departments" to_schema="irmav2" to_table="departments" >
+				<fk_column name="department_id" pk="id" />
+			</fk>
+			<fk name="fk_employees_contracts" to_schema="irmav2" to_table="contracts" >
+				<fk_column name="contract_id" pk="id" />
+			</fk>
+			<fk name="fk_employees_users" to_schema="irmav2" to_table="users" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+			<fk name="fk_employees_locations" to_schema="irmav2" to_table="locations" >
+				<fk_column name="location_id" pk="id" />
+			</fk>
+		</table>
+		<table name="failed_jobs" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="uuid" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="connection" type="text" length="65535" decimal="0" jt="-1" mandatory="y" />
+			<column name="queue" type="text" length="65535" decimal="0" jt="-1" mandatory="y" />
+			<column name="payload" type="longtext" length="2147483647" decimal="0" jt="-1" mandatory="y" />
+			<column name="exception" type="longtext" length="2147483647" decimal="0" jt="-1" mandatory="y" />
+			<column name="failed_at" type="timestamp" decimal="0" jt="93" mandatory="y" >
+				<defo><![CDATA[current_timestamp()]]></defo>
+			</column>
+			<index name="pk_failed_jobs" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="failed_jobs_uuid_unique" unique="UNIQUE_KEY" >
+				<column name="uuid" />
+			</index>
+		</table>
+		<table name="location_details" >
+			<column name="id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="address_line1" type="varchar" length="300" jt="12" mandatory="y" />
+			<column name="postcode" type="varchar" length="20" jt="12" mandatory="y" />
+			<column name="telephone" type="varchar" length="20" jt="12" />
+			<column name="location_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="company_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_location_details_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_location_details_locations" to_schema="irmav2" to_table="locations" >
+				<fk_column name="location_id" pk="id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="locations" >
+			<column name="id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="company_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<column name="manager" type="bigint" jt="-5" mandatory="y" unsigned="y" />
+			<index name="pk_locations_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_locations_companies" to_schema="irmav2" to_table="companies" >
+				<fk_column name="company_id" pk="id" />
+			</fk>
+			<fk name="fk_locations_users" to_schema="irmav2" to_table="users" >
+				<fk_column name="manager" pk="id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="migrations" row_count="13" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="migration" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="batch" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_migrations" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="password_resets" row_count="0" >
+			<column name="email" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="token" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<index name="password_resets_email_index" unique="NORMAL" >
+				<column name="email" />
+			</index>
+		</table>
+		<table name="personal_access_tokens" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="tokenable_type" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="tokenable_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="token" type="varchar" length="64" decimal="0" jt="12" mandatory="y" />
+			<column name="abilities" type="text" length="65535" decimal="0" jt="-1" />
+			<column name="last_used_at" type="timestamp" decimal="0" jt="93" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<index name="pk_personal_access_tokens" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="personal_access_tokens_token_unique" unique="UNIQUE_KEY" >
+				<column name="token" />
+			</index>
+			<index name="personal_access_tokens_tokenable_type_tokenable_id_index" unique="NORMAL" >
+				<column name="tokenable_type" />
+				<column name="tokenable_id" />
+			</index>
+		</table>
+		<table name="rotas" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="start_date" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="end_date" type="date" length="10" decimal="0" jt="91" mandatory="y" />
+			<column name="comments" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="department_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<column name="location_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_rotas" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_rotas_departments" to_schema="irmav2" to_table="departments" >
+				<fk_column name="department_id" pk="id" />
+			</fk>
+			<fk name="fk_rotas_locations" to_schema="irmav2" to_table="locations" >
+				<fk_column name="location_id" pk="id" />
+			</fk>
+		</table>
+		<table name="shift_employee" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="shift_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="employee_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<index name="pk_shift_employee" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_shift_employee_employees" to_schema="irmav2" to_table="employees" >
+				<fk_column name="employee_id" pk="id" />
+			</fk>
+			<fk name="fk_shift_employee_shifts" to_schema="irmav2" to_table="shifts" >
+				<fk_column name="shift_id" pk="id" />
+			</fk>
+		</table>
+		<table name="shifts" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="hours" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="department_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<column name="location_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_shifts" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_shifts_departments" to_schema="irmav2" to_table="departments" >
+				<fk_column name="department_id" pk="id" />
+			</fk>
+			<fk name="fk_shifts_locations" to_schema="irmav2" to_table="locations" >
+				<fk_column name="location_id" pk="id" />
+			</fk>
+		</table>
+		<table name="user_addresses" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="user_id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" />
+			<column name="comments" type="text" length="65535" decimal="0" jt="-1" />
+			<column name="postcode" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="building_name" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="street" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="number" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<index name="pk_user_addresses" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="fk_user_addresses_users" to_schema="irmav2" to_table="users" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="users" row_count="0" >
+			<column name="id" type="bigint" length="20" decimal="0" jt="-5" mandatory="y" unsigned="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="name" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="email_verified_at" type="timestamp" decimal="0" jt="93" />
+			<column name="password" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="remember_token" type="varchar" length="100" decimal="0" jt="12" />
+			<column name="created_at" type="timestamp" decimal="0" jt="93" />
+			<column name="updated_at" type="timestamp" decimal="0" jt="93" />
+			<column name="company_id" type="int" jt="4" mandatory="y" unsigned="y" />
+			<index name="pk_users" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="users_email_unique" unique="UNIQUE_KEY" >
+				<column name="email" />
+			</index>
+			<fk name="fk_users_companies" to_schema="irmav2" to_table="companies" >
+				<fk_column name="company_id" pk="id" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="MyDb" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-8.0.23.jar" driver_desc="Standard" host="localhost" port="3306" user="root" />
+	<layout name="Layout with Tools" id="Layout_25e1" show_column_type="y" show_relation="columns" >
+		<entity schema="irmav2" name="container_shift" color="BED3F4" x="336" y="688" />
+		<entity schema="irmav2" name="containers" color="BED3F4" x="336" y="48" />
+		<entity schema="irmav2" name="contracts" color="BED3F4" x="592" y="272" />
+		<entity schema="irmav2" name="departments" color="BED3F4" x="592" y="688" />
+		<entity schema="irmav2" name="employees" color="BED3F4" x="592" y="912" />
+		<entity schema="irmav2" name="failed_jobs" color="BED3F4" x="336" y="912" />
+		<entity schema="irmav2" name="migrations" color="BED3F4" x="80" y="912" />
+		<entity schema="irmav2" name="password_resets" color="BED3F4" x="96" y="720" />
+		<entity schema="irmav2" name="personal_access_tokens" color="BED3F4" x="48" y="400" />
+		<entity schema="irmav2" name="rotas" color="BED3F4" x="336" y="432" />
+		<entity schema="irmav2" name="shift_employee" color="BED3F4" x="592" y="464" />
+		<entity schema="irmav2" name="shifts" color="BED3F4" x="848" y="448" />
+		<entity schema="irmav2" name="user_addresses" color="BED3F4" x="848" y="688" />
+		<entity schema="irmav2" name="users" color="BED3F4" x="1120" y="688" />
+		<script name="Sample SQL Editor" id="Editor_2c3" language="SQL" >
+			<string><![CDATA[SELECT id, shift_id, container_id, created_at, updated_at
+FROM
+	irmav2.container_shift t;]]></string>
+		</script>
+		<browser id="Browse_185a" name="Sample Relational Data Explorer" confirm_updates="y" >
+			<browse_table schema="irmav2" entity="container_shift" x="20" y="20" width="400" height="300" />
+		</browser>
+		<query id="Query_22c9" name="Sample Query Builder" >
+			<query_table schema="irmav2" name="container_shift" alias="cs" x="48" y="48" >
+				<column name="id" />
+				<column name="shift_id" />
+				<column name="container_id" />
+				<column name="created_at" />
+				<column name="updated_at" />
+			</query_table>
+		</query>
+		<form name="Sample Report" id="Report_be3" template="Wide Page" view="frame" >
+			<var name="samplePageNumber" type="4" value="0" mandatory="n" />
+			<var name="sampleRecordsPerPage" type="4" value="100" mandatory="n" />
+			<body name="Body" template="Grid" pos="0,0,0,0,f,f" layout="{{-2,-2,-2,-2,-1},{-2,-2,-2}}" scroll="n" html="n" >
+				<cell type="label" name="sample" template="H3" pos="0,0,1,0,l,c" />
+				<tableview name="sample" template="Table" css="table table-striped table-bordered table-sm table-hover" pos="0,1,4,1,f,f" layout="{{-2,-2,-2,-2,-2},{-2,-2}}" scroll="n" html="n" header_rows="1" >
+					<form_script type="DataSource" language="SQL" >
+						<var name="id" type="-5" />
+						<var name="shift_id" type="-5" />
+						<var name="container_id" type="-5" />
+						<var name="created_at" type="93" />
+						<var name="updated_at" type="93" />
+						<script ><![CDATA[SELECT * FROM irmav2.container_shift]]></script>
+					</form_script>
+					<cell type="label" name="id" pos="0,0,0,0,c,c" />
+					<cell type="label" name="shift_id" pos="1,0,1,0,c,c" />
+					<cell type="label" name="container_id" pos="2,0,2,0,c,c" />
+					<cell type="label" name="created_at" pos="3,0,3,0,c,c" />
+					<cell type="label" name="updated_at" pos="4,0,4,0,c,c" />
+					<cell type="label" name="${id}" template="Plain" pos="0,1,0,1,l,c" />
+					<cell type="label" name="${shift_id}" template="Plain" pos="1,1,1,1,l,c" />
+					<cell type="label" name="${container_id}" template="Plain" pos="2,1,2,1,l,c" />
+					<cell type="label" name="${created_at}" template="Plain" pos="3,1,3,1,l,c" />
+					<cell type="label" name="${updated_at}" template="Plain" pos="4,1,4,1,l,c" />
+				</tableview>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="0,2,0,2,l,c" glyph="FA-ANGLE_DOUBLE_LEFT" ref_id="Report_be3" >
+					<var name="samplePageNumber" value="0" />
+				</cell>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="1,2,1,2,l,c" glyph="FA-ANGLE_LEFT" ref_id="Report_be3" >
+					<var name="samplePageNumber" value="${Math.max(0,samplePageNumber-1)}" />
+				</cell>
+				<cell type="label" name="Page ${samplePageNumber+1}" pos="2,2,2,2,l,c" />
+				<cell type="href" name="" disabled="${!sampleHasNextPage}" pos="3,2,3,2,l,c" glyph="FA-ANGLE_RIGHT" ref_id="Report_be3" >
+					<var name="samplePageNumber" value="${( samplePageNumber+1 )}" />
+				</cell>
+			</body>
+		</form>
+	</layout>
+	<layout name="Main Layout" id="Layout_abf" show_relation="columns" >
+		<entity schema="irmav2" name="companies" color="C1D8EE" x="1248" y="80" />
+		<entity schema="irmav2" name="container_shift" color="BED3F4" x="3088" y="800" />
+		<entity schema="irmav2" name="containers" color="BED3F4" x="3360" y="448" />
+		<entity schema="irmav2" name="contracts" color="BED3F4" x="1888" y="624" />
+		<entity schema="irmav2" name="departments" color="BED3F4" x="2048" y="576" />
+		<entity schema="irmav2" name="employees" color="BED3F4" x="2320" y="464" />
+		<entity schema="irmav2" name="failed_jobs" color="BED3F4" x="288" y="1120" />
+		<entity schema="irmav2" name="location_details" color="C1D8EE" x="1360" y="80" />
+		<entity schema="irmav2" name="locations" color="C1D8EE" x="1536" y="80" />
+		<entity schema="irmav2" name="migrations" color="BED3F4" x="96" y="1120" />
+		<entity schema="irmav2" name="password_resets" color="BED3F4" x="80" y="928" />
+		<entity schema="irmav2" name="personal_access_tokens" color="BED3F4" x="48" y="608" />
+		<entity schema="irmav2" name="rotas" color="BED3F4" x="3104" y="176" />
+		<entity schema="irmav2" name="shift_employee" color="BED3F4" x="2576" y="816" />
+		<entity schema="irmav2" name="shifts" color="BED3F4" x="2880" y="448" />
+		<entity schema="irmav2" name="user_addresses" color="BED3F4" x="2544" y="1024" />
+		<entity schema="irmav2" name="users" color="BED3F4" x="2272" y="1024" />
+		<group name="upper_management" color="ECF0F7" >
+			<entity schema="irmav2" name="companies" />
+			<entity schema="irmav2" name="locations" />
+			<entity schema="irmav2" name="location_details" />
+		</group>
+	</layout>
+</project>
