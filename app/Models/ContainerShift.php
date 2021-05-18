@@ -12,4 +12,5 @@ class ContainerShift extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['container_id', 'shift_id'];
 
+
 }
