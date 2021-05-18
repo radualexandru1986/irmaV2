@@ -31,4 +31,9 @@ class Location extends Model
     {
         //return the manager
     }
+
+    public function details()
+    {
+        return $this->hasOne(LocationDetails::class, 'location_id');
+    }
 }

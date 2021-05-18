@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Contract extends Model
 {
@@ -19,10 +21,10 @@ class Contract extends Model
     /**
      * Gets the Employee model
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return HasMany
      */
-    public function employees()
+    public function employees(): HasMany
     {
-        return $this->belongsToMany('\App\Models\Employee', 'contract_id');
+        return $this->hasMany(Employee::class, 'contract_id');
     }
 }

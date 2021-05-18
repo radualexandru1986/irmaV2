@@ -2,21 +2,23 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\Location;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LocationTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+   use DatabaseMigrations;
 
-        $response->assertStatus(200);
-    }
+    /**
+     * @test
+     */
+   public function itCreatesALocation()
+   {
+       $location = Location::factory()->create();
+
+       $this->assertNotFalse($location->name);
+   }
 }

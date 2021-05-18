@@ -13,7 +13,7 @@ class Container extends Model
 
     protected $table = 'containers';
     protected $primaryKey ='id';
-    protected $fillable = ['module_date', 'rota_id'];
+    protected $fillable = ['container_date', 'rota_id'];
 
 //    == Relations ==
 
@@ -36,6 +36,5 @@ class Container extends Model
     {
         return $this->belongsToMany(Shift::class, 'container_shift', 'container_id', 'shift_id');
     }
-
 
 }

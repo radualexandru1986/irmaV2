@@ -21,8 +21,6 @@ class LocationDetailsFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        return ['location_id'=>1, 'address_line1'=>$this->faker->address, 'postcode'=>$this->faker->postcode, 'telephone'=>$this->faker->phoneNumber];
     }
 }

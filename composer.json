@@ -48,6 +48,9 @@
         ],
         "test-unit" : [
             "@php artisan test --testsuit=Unit"
+        ],
+        "test-models" : [
+            "@php vendor/bin/phpunit tests/Unit/Models/"
         ]
     },
     "extra": {

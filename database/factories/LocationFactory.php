@@ -22,7 +22,9 @@ class LocationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'=>$this->faker->colorName,
+            'company_id'=>1,
+            'manager_id'=>1
         ];
     }
 }

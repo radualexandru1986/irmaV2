@@ -15,7 +15,7 @@ class CreateContainersTable extends Migration
     {
         Schema::create('containers', function (Blueprint $table) {
             $table->id();
-            $table->date('module_date');
+            $table->date('container_date');
             $table->unsignedBigInteger('rota_id');
             $table->timestamps();
         });

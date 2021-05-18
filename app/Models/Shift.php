@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Container;
 use App\Models\Employee;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Shift extends Model
 {
@@ -13,7 +14,7 @@ class Shift extends Model
 
     protected $table = 'shifts';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'hours', 'department_id', 'location_id'];
+    protected $fillable = ['name', 'hours', 'department_id'];
 
 
 //    == Relations ==
@@ -31,9 +32,9 @@ class Shift extends Model
     /**
      * This gets the Container model
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function container()
+    public function containers()
     {
         return $this->belongsToMany(Container::class, 'container_shift', 'shift_id', 'container_id');
     }
@@ -41,10 +42,21 @@ class Shift extends Model
     /**
      * Gets the Employees
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function employees()
+    public function employees(): BelongsToMany
     {
         return $this->belongsToMany(Employee::class, 'shift_employee', 'shift_id', 'employee_id');
+    }
+
+
+    // Methods
+
+    /**
+     * Get the location where a shift is assigned
+     */
+    public function location(): Object
+    {
+        return $this->department()->first()->location;
     }
 }
