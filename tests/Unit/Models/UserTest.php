@@ -20,7 +20,6 @@ class UserTest extends TestCase
     public function itCreatesAUser()
     {
         $user = User::factory()->create();
-
         //Expecting to create 4 users
         $this->assertEquals(1, $user->count());
     }

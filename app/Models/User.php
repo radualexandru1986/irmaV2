@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\LocationScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -76,5 +77,10 @@ class User extends Authenticatable
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class, 'location_id');
+    }
+
+    protected static function booted()
+    {
+        //static::addGlobalScope(new LocationScope('Dussindalepark', 1));
     }
 }

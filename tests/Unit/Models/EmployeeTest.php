@@ -77,6 +77,7 @@ class EmployeeTest extends TestCase
 
        //verify the employee-user relation;
        $employeeUserRelation  = $employee->user;
+//       dd($employee->toArray());
        $this->assertEquals($user->toArray(), $employeeUserRelation->toArray());
 
        //verify employee-department relation
