@@ -43,7 +43,7 @@ class UserAddressTest extends TestCase
 
         //check the relation
         $addressUserRelation = $address->user;
-        $this->assertEquals($addressUserRelation->toArray(), $user->toArray());
+        $this->assertEquals($addressUserRelation->name, $user->name);
 
     }
 }
