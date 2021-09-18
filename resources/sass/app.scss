@@ -1,5 +1,7 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
 
 // Variables
 @import 'variables';
@@ -8,3 +10,5 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 
+//Custom files to be imported
+@import 'layout/left-bar.component';

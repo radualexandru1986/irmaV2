@@ -3,27 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shift;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class ShiftController extends Controller
 {
-	
+
 	/**
 	 * ShiftController constructor.
 	 */
 	public function __construct()
 	{
-//		$this->middleware('auth');
+		$this->middleware('auth');
 	}
-	
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
-        return 'this is the index of shift controller';
+        return view('shifts.index');
     }
 
     /**

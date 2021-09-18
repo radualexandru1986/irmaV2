@@ -23,22 +23,23 @@
     </style>
 </head>
 <body style="background-image:url({{asset('images/main.jpg')}}) ">
-<div class="container-fluid m-0 p-0 d-flex justify-content-end ">
+<div class="container-flui m-0 p-0 d-flex justify-content-end ">
     <div class="card col-lg-5 col-sm-12 col-md-6 col-xl-3 vh-100">
         <div class="card-body py-5">
             <h2 class="card-title text-center">Admin</h2>
-            <form class="mx-auto w-75 my-5">
+            <form class="mx-auto w-75 my-5" method="post" action="/login">
+                @csrf
                 <div class="mb-3">
                     <label  class="form-label">Email address</label>
-                    <input type="email" class="form-control form-control-lg" autofocus>
+                    <input type="email" class="form-control form-control-lg" autofocus name="email">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1">
+                    <input type="password" class="form-control form-control-lg" name="password">
                 </div>
 
                 <div class="d-grid gap-2">
-                    <button class="btn btn-indigo btn-lg" type="button">Login</button>
+                    <button class="btn btn-indigo btn-lg" type="submit">Login</button>
                 </div>
             </form>
         </div>

@@ -11,7 +11,7 @@ use App\Models\Employee;
 use App\Models\Department;
 use App\Models\User;
 
-class EmployeeTest extends TestCase
+class   EmployeeTest extends TestCase
 {
    use DatabaseMigrations;
 
@@ -26,7 +26,7 @@ class EmployeeTest extends TestCase
        $user = User::factory()->create();
 
        //creating a contract
-       $contract = Contract::create(['hours'=>44, 'location_id'=>1]);
+       $contract = Contract::create(['hours'=>44]);
 
        //creating the Department
        $department = Department::factory()->create();
@@ -35,14 +35,12 @@ class EmployeeTest extends TestCase
       $employee = Employee::create([
            'user_id'=>$user->id,
            'department_id'=>$department->id,
-           'contract_id' => $contract->id,
-            'company_id' => 1
+           'contract_id' => $contract->id
            ]);
       $data = [
           'user_id'=>$user->id,
           'department_id'=>$department->id,
-          'contract_id' => $contract->id,
-          'company_id' => 1
+          'contract_id' => $contract->id
       ];
 
       //verify data is inserted
@@ -60,7 +58,7 @@ class EmployeeTest extends TestCase
        $user = User::factory()->create();
 
        //creating a contract
-       $contract = Contract::create(['hours'=>44, 'location_id'=>1]);
+       $contract = Contract::create(['hours'=>44]);
 
        //creating the Department
        $department = Department::factory()->create();
@@ -69,8 +67,7 @@ class EmployeeTest extends TestCase
       $employee = Employee::create([
            'user_id'=>$user->id,
            'department_id'=>$department->id,
-           'contract_id' => $contract->id,
-          'company_id' => 1
+           'contract_id' => $contract->id
            ]);
       //verify data is inserted
        $this->assertEquals($employee->user_id, $user->id);

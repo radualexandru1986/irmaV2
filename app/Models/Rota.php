@@ -12,7 +12,7 @@ class Rota extends Model
     use HasFactory;
 
     protected $table = 'rotas';
-    protected $fillable = ['start_date', 'end_date', 'comments', 'department_id', 'location_id'];
+    protected $fillable = ['start_date', 'end_date', 'comments', 'department_id'];
 
 
 

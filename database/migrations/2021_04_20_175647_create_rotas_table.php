@@ -16,7 +16,6 @@ class CreateRotasTable extends Migration
         Schema::create('rotas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('department_id');
-            $table->unsignedBigInteger('location_id');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('comments')->nullable();

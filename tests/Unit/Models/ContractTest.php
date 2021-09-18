@@ -19,14 +19,14 @@ class ContractTest extends TestCase
      */
   public function itCreatesAContract()
   {
-      $contract = Contract::create(['hours'=>12, 'location_id'=>1]);
+      $contract = Contract::create(['hours'=>12]);
 
       $this->assertEquals(12, $contract->hours);
   }
 
   public function test_relation()
   {
-      $contract  = Contract::create(['hours'=>12, 'location_id'=>1]);
+      $contract  = Contract::create(['hours'=>12]);
       $employees = Employee::factory()->count(10)->create();
 
 

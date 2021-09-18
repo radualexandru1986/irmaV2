@@ -16,9 +16,9 @@ class LocationScope implements Scope
         $this->locationId = $locationId;
     }
 
-    // TODO: Implement apply() method.
-    public function apply(Builder $builder, Model $model)
-    {
-       $builder->where('location_id', $this->locationId);
-    }
+    // // TODO: Implement apply() method.
+    // public function apply(Builder $builder, Model $model)
+    // {
+    //    $builder->where('location_id', $this->locationId);
+    // }
 };

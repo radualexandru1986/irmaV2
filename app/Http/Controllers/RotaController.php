@@ -14,7 +14,7 @@ class RotaController extends Controller
      */
     public function index()
     {
-        //
+        return view('rotas.index');
     }
 
     /**

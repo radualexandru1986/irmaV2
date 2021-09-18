@@ -25,11 +25,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'role_id',
         'name',
         'email',
         'password',
-        'location_id',
-        'company_id'
     ];
 
     /**
@@ -80,8 +79,27 @@ class User extends Authenticatable
         return $this->belongsTo(Location::class, 'location_id');
     }
 
+
+    /**
+     * @return BelongsTo
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+
+
     protected static function booted()
     {
         //static::addGlobalScope(new LocationScope('Dussindalepark', 1));
+    }
+
+
+    //methods
+
+    public function isAdmin()
+    {
+        return $this->role->name === 'admin';
     }
 }

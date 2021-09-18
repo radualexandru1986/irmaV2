@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\LocationDetails;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class LocationDetailsFactory extends Factory
+class RoleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = LocationDetails::class;
+    protected $model = Role::class;
 
     /**
      * Define the model's default state.
@@ -21,6 +21,8 @@ class LocationDetailsFactory extends Factory
      */
     public function definition()
     {
-        return ['location_id'=>1, 'address_line1'=>$this->faker->address, 'postcode'=>$this->faker->postcode, 'telephone'=>$this->faker->phoneNumber];
+        return [
+            'name' => 'admin'
+        ];
     }
 }

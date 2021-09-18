@@ -29,17 +29,14 @@ class ShiftTest extends TestCase
      */
     public function testTheRelations()
     {
-        $location = Location::create(['name' => 'DussindalePark', 'company_id'=>1, 'manager_id'=>1]);
 
-        $department = Department::factory()->create(['location_id'=>$location->id]);
+
+        $department = Department::factory()->create();
 
         $shift = Shift::factory()->create(['department_id' => $department->id]);
 
         //testing direct relations
         $this->assertEquals($department->toArray(), $shift->department->toArray());
-
-        // location() method  from  the model
-        $this->assertEquals($shift->location()->toArray(), $location->toArray());
 
     }
 }

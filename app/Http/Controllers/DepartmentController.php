@@ -14,7 +14,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return 'this is the index from department controller';
+        return view('departments.index');
     }
 
     /**

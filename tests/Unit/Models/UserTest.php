@@ -3,6 +3,7 @@
 namespace Tests\Unit\Models;
 
 use App\Models\Employee;
+use App\Models\Role;
 use App\Models\UserAddress;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -14,6 +15,8 @@ use Tests\TestCase;
 class UserTest extends TestCase
 {
     use DatabaseMigrations;
+
+
     /**
      * @test
      */
@@ -23,6 +26,21 @@ class UserTest extends TestCase
         //Expecting to create 4 users
         $this->assertEquals(1, $user->count());
     }
+
+    /**
+     * @test
+     */
+    public function itHasAdminRole()
+    {
+        $user = User::factory()->create();
+
+        $role = Role::factory()->create();
+
+        $this->assertEquals('admin', $user->first()->role->name);
+        $this->assertEquals($user->role->toArray(), $role->toArray());
+    }
+
+
 
     /**
      * @test
@@ -75,8 +93,7 @@ class UserTest extends TestCase
         $employee = Employee::create([
             'user_id'=>$user->id,
             'department_id'=>1,
-            'contract_id' =>1,
-            'company_id'=>1
+            'contract_id' =>1
         ]);
 
 

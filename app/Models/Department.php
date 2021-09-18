@@ -13,7 +13,7 @@ class Department extends Model
 
     protected $primaryKey = 'id';
     protected $table = 'departments';
-    protected $fillable = ['name', 'description', 'location_id'];
+    protected $fillable = ['name', 'description'];
 
 //    == Relations ==
 

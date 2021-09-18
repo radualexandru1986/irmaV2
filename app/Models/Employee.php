@@ -14,7 +14,11 @@ class Employee extends Model
 
     protected $table = 'employees';
     protected $primaryKey = 'id';
-    protected $fillable = ['contract_id', 'department_id', 'user_id', 'company_id'];
+    protected $fillable = [
+        'contract_id',
+        'department_id',
+        'user_id',
+    ];
 
 
 //    == Relations ==

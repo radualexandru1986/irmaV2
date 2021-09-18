@@ -23,7 +23,6 @@ class DepartmentFactory extends Factory
     {
         return [
            'name' =>$this->faker->colorName,
-            'location_id' => 1,
             'description' => 'some description'
         ];
     }

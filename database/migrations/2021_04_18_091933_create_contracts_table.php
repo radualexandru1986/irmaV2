@@ -15,7 +15,6 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('location_id');
             $table->string('hours');
             $table->timestamps();
         });
