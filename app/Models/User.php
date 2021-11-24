@@ -14,8 +14,9 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\UserAddress;
 use App\Models\Employee;
 use App\Models\Location;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -89,7 +90,9 @@ class User extends Authenticatable
     }
 
 
-
+    /**
+     * Global scope.
+     */
     protected static function booted()
     {
         //static::addGlobalScope(new LocationScope('Dussindalepark', 1));
@@ -98,8 +101,28 @@ class User extends Authenticatable
 
     //methods
 
+    /**
+     * Returns tru if the model is Admin
+     * @return bool
+     */
     public function isAdmin()
     {
         return $this->role->name === 'admin';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+       return [];
     }
 }
