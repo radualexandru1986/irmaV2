@@ -55,6 +55,12 @@
         ],
         "test-models" : [
             "@php vendor/bin/phpunit tests/Unit/Models/"
+        ],
+        "filter" : [
+            "@php vendor/bin/phpunit --filter"
+        ],
+        "test": [
+            "@php vendor/bin/phpunit"
         ]
     },
     "extra": {

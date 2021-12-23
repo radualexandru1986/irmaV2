@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
+use App\Contracts\Repositories\Containers\Container;
 use App\Contracts\Repositories\Departments\Department;
 use App\Contracts\Repositories\Users\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\ServiceProvider;
-use App\Contracts\Repositories\BaseRespository as BaseRepositoryInterface;
+use App\Contracts\Repositories\BaseRepository as BaseRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BaseRepositoryInterface::class, BaseRepository::class);
         $this->bindUsers();
         $this->bindDepartments();
+        $this->bindContainers();
     }
 
     /**
@@ -40,5 +42,10 @@ class RepositoryServiceProvider extends ServiceProvider
     public function bindDepartments()
     {
         $this->app->bind(Department::class, \App\Repositories\Departments\Department::class);
+    }
+
+    public function bindContainers()
+    {
+        $this->app->bind(Container::class, \App\Repositories\Containers\Container::class);
     }
 }
