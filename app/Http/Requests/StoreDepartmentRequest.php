@@ -13,7 +13,7 @@ class StoreDepartmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class StoreDepartmentRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'description' => 'string'
+            'description' => 'required'
         ];
     }
 }

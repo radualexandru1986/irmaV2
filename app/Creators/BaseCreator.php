@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Creators;
-
-use App\Http\Requests\StoreUserRequest;
-use App\Repositories\Users\User as modelRepository;
 use Illuminate\Support\Facades\DB;
 
 class BaseCreator
 {
+
+    protected $model;
     /**
-     * Tries to store a user. If is not successful then it rolls back the changes.
      *
      * @param array $data
      * @return mixed
@@ -19,34 +17,33 @@ class BaseCreator
     {
         try {
             DB::beginTransaction();
-            $user = $this->modelRepository->setTemplate($data)->storeModel();
+            $model = $this->model->setTemplate($data)->storeModel();
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();
-            throw new \Exception('Something went wrong');
+            throw new \Exception('Something went wrong in the Creator');
         }
 
-        return $user;
+        return $model;
     }
 
     /**
-     * @param int $userId
-     * @param StoreUserRequest $request
-     * @return \App\Models\User|modelRepository
+     * @param int $modelId
+     * @param array $data
      * @throws \Exception
      */
-    public function updateByReference(int $userId, array $data)
+    public function updateByReference(int $modelId, array $data)
     {
         try {
             DB::beginTransaction();
-            $user = $this->modelRepository->updateByReference($userId, $data);
+            $model = $this->model->updateByReference($modelId, $data);
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();
             throw new \Exception('The user was not updated');
         }
 
-        return $user;
+        return $model;
     }
 
     /**
@@ -58,7 +55,7 @@ class BaseCreator
     {
         try {
             DB::beginTransaction();
-            $result = $this->modelRepository->destroyModel($modelId);
+            $result = $this->model->destroyModel($modelId);
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();

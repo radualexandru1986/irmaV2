@@ -3,12 +3,10 @@
 namespace App\Repositories;
 
 use App\Contracts\Repositories\BaseRepository as BaseRepoInterface;
-use App\Models\User as UserModel;
-use App\Repositories\Users\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-abstract class BaseRepository  implements BaseRepoInterface
+abstract class BaseRepository implements BaseRepoInterface
 {
     protected Model $model;
     protected array $modelTemplate;
@@ -25,7 +23,6 @@ abstract class BaseRepository  implements BaseRepoInterface
      * Stores a model in the database
      *
      * @param array $data
-     * @return User
      */
     function storeModel(): mixed
     {
@@ -37,7 +34,7 @@ abstract class BaseRepository  implements BaseRepoInterface
      * @param array $data
      * @return $this
      */
-    function updateByReference(int $modelId, array $data): UserModel
+    function updateByReference(int $modelId, array $data):mixed
     {
         $updatedModel = $this->model->findOrFail($modelId);
         $updatedModel->update($data);

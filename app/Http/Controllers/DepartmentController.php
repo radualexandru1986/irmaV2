@@ -3,13 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDepartmentRequest;
-use App\Models\Department;
 use Illuminate\Http\Request;
-use App\Creators\Departments\Department as DepartmentCreator;
+use App\Creators\Departments\Department;
 use Illuminate\Http\Response;
 
 class DepartmentController extends Controller
 {
+
+    /**
+     * UsersController constructor.
+     */
+    public function __construct()
+    {
+        //checks if the user is authenticated
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,17 +42,18 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return Response
+     * @throws \Exception
      */
-    public function store(DepartmentCreator $department, StoreDepartmentRequest $request ): mixed
+    public function store(Department $department, StoreDepartmentRequest $request ): mixed
     {
         $newDepartment = $department->storeModel($request->validated());
         if($request->wantsJson()){
             return response()->json(
                 [
-                    'msg'=>'Well Done!',
-                    'user' => $newDepartment->id
+                    'msg'=>'The department is saved!',
+                    'department' => $newDepartment->id
                 ]
             );
         }
@@ -87,7 +97,7 @@ class DepartmentController extends Controller
             return response()->json(
                 [
                     'msg'=>'The department details are saved!',
-                    'userId'=>$updatedDepartment->id
+                    'department'=>$updatedDepartment->id
                 ]
             );
         }
@@ -102,14 +112,14 @@ class DepartmentController extends Controller
      * @param Department $department
      * @return Response
      */
-    public function destroy($id, Request $request, DepartmentCreator $department): mixed
+    public function destroy($id, Request $request, Department $department): mixed
     {
         $result = $department->destroyModel($id);
         if ($result) {
             if($request->wantsJson()) {
                 return response()->json(
                     [
-                        'msg' => 'The department was deleted'
+                        'msg' => 'The department was deleted!'
                     ]
                 );
             }

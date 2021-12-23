@@ -18,7 +18,6 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-
         //checks if the user is authenticated
         $this->middleware('auth');
 
