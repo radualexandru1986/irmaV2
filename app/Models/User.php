@@ -2,23 +2,19 @@
 
 namespace App\Models;
 
-use App\Scopes\LocationScope;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\UserAddress;
-use App\Models\Employee;
-use App\Models\Location;
+//use App\Models\Location;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -72,19 +68,19 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Employee::class, 'user_id');
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function location(): BelongsTo
-    {
-        return $this->belongsTo(Location::class, 'location_id');
-    }
+//    /**
+//     * @return BelongsTo
+//     */
+//    public function location(): BelongsTo
+//    {
+//        return $this->belongsTo(Location::class, 'location_id');
+//    }
 
 
     /**
      * @return BelongsTo
      */
-    public function role()
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
@@ -105,7 +101,7 @@ class User extends Authenticatable implements JWTSubject
      * Returns tru if the model is Admin
      * @return bool
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->role->name === 'admin';
     }
@@ -113,7 +109,7 @@ class User extends Authenticatable implements JWTSubject
     /**
      * @return mixed
      */
-    public function getJWTIdentifier()
+    public function getJWTIdentifier(): mixed
     {
         return $this->getKey();
     }
@@ -121,7 +117,7 @@ class User extends Authenticatable implements JWTSubject
     /**
      * @return array
      */
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
        return [];
     }
