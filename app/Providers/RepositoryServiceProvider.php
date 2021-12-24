@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Contracts\Repositories\Containers\Container;
 use App\Contracts\Repositories\Contracts\Contract;
 use App\Contracts\Repositories\Departments\Department;
+use App\Contracts\Repositories\Employees\Employee;
 use App\Contracts\Repositories\Users\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\ServiceProvider;
@@ -24,6 +25,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->bindDepartments();
         $this->bindContainers();
         $this->bindContracts();
+        $this->bindEmployees();
     }
 
     /**
@@ -55,5 +57,10 @@ class RepositoryServiceProvider extends ServiceProvider
     public function bindContracts()
     {
         $this->app->bind(Contract::class, \App\Repositories\Contracts\Contract::class);
+    }
+
+    public function bindEmployees()
+    {
+        $this->app->bind(Employee::class, \App\Repositories\Employees\Employee::class);
     }
 }

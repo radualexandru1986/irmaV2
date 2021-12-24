@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -33,9 +34,18 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request, \App\Creators\Employees\Employee $employeeCreator)
     {
-        //
+        $newEmployee = $employeeCreator->storeModel($request->validated());
+        if($request->wantsJson()){
+            return response()->json(
+                [
+                    'msg' => 'Your employee is saved',
+                    'employee' => $newEmployee->id
+                ]
+            );
+        }
+        return redirect()->back();
     }
 
     /**
@@ -63,13 +73,21 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Employee  $employee
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Employee $employee
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function update(Request $request, Employee $employee)
+    public function update(int $id, StoreEmployeeRequest $request, \App\Creators\Employees\Employee $employeeCreator)
     {
-        //
+        $updatedEmployee = $employeeCreator->updateByReference($id, $request->validated() );
+        if ($request->wantsJson()) {
+            return response()->json([
+                'msg' => 'Your employee is updated!',
+                'employee' => $updatedEmployee->id
+            ]);
+        }
+        return redirect()->back();
     }
 
     /**
@@ -78,8 +96,15 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(int $id, Request $request, \App\Creators\Employees\Employee $employeeCreator)
     {
-        //
+        $employeeCreator->destroyModel($id);
+        if($request->wantsJson()) {
+            return response()->json([
+                'msg' => 'Your employee is now destroyed !'
+            ]);
+        }
+
+        return redirect()->back();
     }
 }
