@@ -20,7 +20,7 @@ class Department extends BaseRepository implements DepartmentInterface
      * @param array $data
      * @return Department
      */
-    function setTemplate(array $data): Department
+    public function setTemplate(array $data): Department
     {
         $this->modelTemplate = [
             'name' => $data['name'],

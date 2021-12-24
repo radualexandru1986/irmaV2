@@ -26,7 +26,7 @@ class   EmployeeTest extends TestCase
        $user = User::factory()->create();
 
        //creating a contract
-       $contract = Contract::create(['hours'=>44]);
+       $contract = Contract::create(['name'=>'ContrACT','hours'=>44]);
 
        //creating the Department
        $department = Department::factory()->create();
@@ -58,7 +58,7 @@ class   EmployeeTest extends TestCase
        $user = User::factory()->create();
 
        //creating a contract
-       $contract = Contract::create(['hours'=>44]);
+       $contract = Contract::create(['name'=>'Contract','hours'=>44]);
 
        //creating the Department
        $department = Department::factory()->create();

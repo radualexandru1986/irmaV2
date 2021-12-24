@@ -47,7 +47,7 @@ abstract class BaseRepository implements BaseRepoInterface
      */
     function destroyModel(int $modelId): bool
     {
-        return $this->model->destroy($modelId);
+        return $this->model->find($modelId)->delete();
     }
 
 }

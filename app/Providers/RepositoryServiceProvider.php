@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\Repositories\Containers\Container;
+use App\Contracts\Repositories\Contracts\Contract;
 use App\Contracts\Repositories\Departments\Department;
 use App\Contracts\Repositories\Users\User;
 use App\Repositories\BaseRepository;
@@ -22,6 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->bindUsers();
         $this->bindDepartments();
         $this->bindContainers();
+        $this->bindContracts();
     }
 
     /**
@@ -33,6 +35,7 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         //
     }
+
 
     public function bindUsers()
     {
@@ -47,5 +50,10 @@ class RepositoryServiceProvider extends ServiceProvider
     public function bindContainers()
     {
         $this->app->bind(Container::class, \App\Repositories\Containers\Container::class);
+    }
+
+    public function bindContracts()
+    {
+        $this->app->bind(Contract::class, \App\Repositories\Contracts\Contract::class);
     }
 }

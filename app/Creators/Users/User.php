@@ -13,7 +13,7 @@ class User extends BaseCreator
      */
     public function __construct(ModelRepository $userRepository)
     {
-        $this->model = $userRepository;
+        $this->modelRepository = $userRepository;
     }
 
 }

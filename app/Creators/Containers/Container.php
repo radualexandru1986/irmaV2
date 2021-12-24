@@ -13,7 +13,7 @@ class Container extends BaseCreator
      */
     public function __construct(ContainerModel $container)
     {
-        $this->model = $container;
+        $this->modelRepository = $container;
     }
 
 }

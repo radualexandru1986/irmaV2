@@ -23,7 +23,7 @@ class ContractFactory extends Factory
     {
         return [
             'hours' => rand(11 , 44),
-            'location_id' => 1
+            'name' => $this->faker->name
         ];
     }
 }

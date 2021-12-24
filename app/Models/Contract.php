@@ -13,7 +13,7 @@ class Contract extends Model
 
     protected $table = 'contracts';
     protected $primaryKey = 'id';
-    protected $fillable = ['hours'];
+    protected $fillable = ['hours', 'name'];
 
 
 //    == Relations ==

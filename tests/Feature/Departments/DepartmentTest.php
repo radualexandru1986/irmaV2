@@ -122,7 +122,6 @@ class DepartmentsTest extends TestCase
         $departments =  Department::factory(3)->create();
         $response = $this->deleteJson('/department/'.$departments->last()->id);
 
-       // $this->assertDeleted('departments',['department_id' =>$departments->last()->id]);
         $d =  Department::all();
         $this->assertEquals(2, $d->count());
         $response->assertHeader('content-type', 'application/json');
@@ -134,12 +133,12 @@ class DepartmentsTest extends TestCase
      */
     public function itDeletesADepartment()
     {
+        $this->withoutExceptionHandling();
         $departments =  Department::factory(3)->create();
+
         $this->delete('/department/'.$departments->last()->id);
 
-        // $this->assertDeleted('departments',['department_id' =>$departments->last()->id]);
-        $d =  Department::all();
-        $this->assertEquals(2, $d->count());
-        $this->assertDeleted('departments',['department_id' =>$departments->last()->id]);
+        $this->assertDeleted('departments',['id' =>$departments->last()->id]);
+
     }
 }

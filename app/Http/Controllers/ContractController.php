@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreContractRequest;
 use App\Models\Contract;
 use Illuminate\Http\Request;
+use App\Creators\Contracts\Contract as ContractCreator;
 
 class ContractController extends Controller
 {
@@ -33,9 +35,19 @@ class ContractController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreContractRequest $request, ContractCreator $contract): mixed
     {
-        //
+        $newContract = $contract->storeModel($request->validated());
+        if($request->wantsJson()){
+            return response()->json(
+                [
+                    'msg'=>'Your contract is saved!',
+                    'contract' => $newContract->id
+                ]
+            );
+        }
+        return redirect()->to('contract');
+
     }
 
     /**
@@ -63,13 +75,25 @@ class ContractController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contract  $contract
+     * @param $id
+     * @param StoreContractRequest $request
+     * @param ContractCreator $contractCreator
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function update(Request $request, Contract $contract)
+    public function update($id, StoreContractRequest $request, ContractCreator $contractCreator): mixed
     {
-        //
+        $updatedContract = $contractCreator->updateByReference($id, $request->validated());
+        if($request->wantsJson()){
+            return response()->json(
+                [
+                    'msg'=>'Your contract is updated!',
+                    'contract' => $updatedContract->id
+                ]
+            );
+        }
+
+        return redirect()->to('contract');
     }
 
     /**
@@ -78,8 +102,18 @@ class ContractController extends Controller
      * @param  \App\Models\Contract  $contract
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contract $contract)
+    public function destroy(int $id, ContractCreator $contract, Request $request):mixed
     {
-        //
+        $contract->destroyModel($id);
+
+        if ($request->wantsJson()){
+            return response()->json(
+                [
+                    'msg'=>'The contract is now destroyed!'
+                ]
+            );
+        }
+
+        return redirect()->to('contract');
     }
 }

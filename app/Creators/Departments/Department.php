@@ -12,7 +12,7 @@ class Department extends BaseCreator
      */
     public function __construct(ModelRepository $department)
     {
-        $this->model = $department;
+        $this->modelRepository = $department;
     }
 
 }

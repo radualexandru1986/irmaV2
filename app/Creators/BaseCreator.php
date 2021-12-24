@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 class BaseCreator
 {
 
-    protected $model;
+    protected $modelRepository;
     /**
      *
      * @param array $data
@@ -17,7 +17,7 @@ class BaseCreator
     {
         try {
             DB::beginTransaction();
-            $model = $this->model->setTemplate($data)->storeModel();
+            $model = $this->modelRepository->setTemplate($data)->storeModel();
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();
@@ -36,7 +36,7 @@ class BaseCreator
     {
         try {
             DB::beginTransaction();
-            $model = $this->model->updateByReference($modelId, $data);
+            $model = $this->modelRepository->updateByReference($modelId, $data);
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();
@@ -55,7 +55,7 @@ class BaseCreator
     {
         try {
             DB::beginTransaction();
-            $result = $this->model->destroyModel($modelId);
+            $result = $this->modelRepository->destroyModel($modelId);
             DB::commit();
         }catch (\Exception $e) {
             DB::rollBack();

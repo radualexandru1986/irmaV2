@@ -104,7 +104,7 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function itDeletesAnUserAndExpectsJson()
+    public function itDeletesAUserAndExpectsJson()
     {
         $users =  User::factory(3)->create();
         $response = $this->deleteJson('/user/'.$users->last()->id);
@@ -114,15 +114,17 @@ class UserTest extends TestCase
         $response->assertHeader('content-type', 'application/json');
         $response->assertStatus(200);
         $response->assertJsonFragment(['msg'=>'The user was deleted']);
+
     }
     /**
      * @test
      */
-    public function itDeletesAnUser()
+    public function itDeletesAUser()
     {
-        $users =  User::factory(3)->create();
-        $this->delete('/user/'.$users->last()->id);
+        $user =  User::factory()->create();
 
-        $this->assertDeleted('users',['user_id' =>$users->last()->id]);
+        $this->assertEquals(2, User::all()->count());
+        $this->delete('/user/'.$user->id);
+        $this->assertEquals(1, User::all()->count());
     }
 }
