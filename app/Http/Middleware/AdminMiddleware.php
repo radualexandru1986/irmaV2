@@ -11,13 +11,13 @@ class AdminMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()){
+        if (Auth::user()) {
             if ($request->user()->role->name != 'admin') {
                 return redirect('/');
             }

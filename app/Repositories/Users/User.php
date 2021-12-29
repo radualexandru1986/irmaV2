@@ -28,7 +28,7 @@ class User extends BaseRepository implements UserInterface
         $this->modelTemplate = [
             'role_id' => $data['role_id'],
             'name' => $data['name'],
-            'email'=> $data['email'],
+            'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ];
 

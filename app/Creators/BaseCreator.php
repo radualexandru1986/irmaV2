@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Creators;
+
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class BaseCreator
 {
 
     protected $modelRepository;
+
     /**
      *
      * @param array $data
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function storeModel(array $data)
     {
@@ -19,9 +22,9 @@ class BaseCreator
             DB::beginTransaction();
             $model = $this->modelRepository->setTemplate($data)->storeModel();
             DB::commit();
-        }catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
-            throw new \Exception('Something went wrong in the Creator');
+            throw new Exception('Something went wrong in the Creator');
         }
 
         return $model;
@@ -30,7 +33,7 @@ class BaseCreator
     /**
      * @param int $modelId
      * @param array $data
-     * @throws \Exception
+     * @throws Exception
      */
     public function updateByReference(int $modelId, array $data)
     {
@@ -38,9 +41,9 @@ class BaseCreator
             DB::beginTransaction();
             $model = $this->modelRepository->updateByReference($modelId, $data);
             DB::commit();
-        }catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
-            throw new \Exception('The user was not updated');
+            throw new Exception('The user was not updated');
         }
 
         return $model;
@@ -49,7 +52,7 @@ class BaseCreator
     /**
      * @param int $modelId
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroyModel(int $modelId)
     {
@@ -57,9 +60,9 @@ class BaseCreator
             DB::beginTransaction();
             $result = $this->modelRepository->destroyModel($modelId);
             DB::commit();
-        }catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
-            throw new \Exception('The model was not deleted.');
+            throw new Exception('The model was not deleted.');
         }
 
         return $result;

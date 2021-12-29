@@ -18,6 +18,7 @@ class CreateShiftsTable extends Migration
             $table->unsignedBigInteger('department_id');
             $table->string('name');
             $table->string('hours');
+            $table->integer('index');
             $table->timestamps();
         });
     }

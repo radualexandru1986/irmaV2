@@ -23,9 +23,9 @@ class Contract extends BaseRepository implements ContractInterface
     public function setTemplate(array $data): Contract
     {
         $this->modelTemplate = [
-                'name' => $data['name'],
-                'hours' => $data['hours']
-            ];
+            'name' => $data['name'],
+            'hours' => $data['hours']
+        ];
         return $this;
     }
 }

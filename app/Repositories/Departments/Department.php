@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repositories\Departments;
+
 use App\Contracts\Repositories\Departments\Department as DepartmentInterface;
 use App\Repositories\BaseRepository;
 use App\Models\Department as DepartmentModel;

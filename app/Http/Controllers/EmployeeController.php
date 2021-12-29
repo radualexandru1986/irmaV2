@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Employee;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,7 +23,7 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -31,13 +33,13 @@ class EmployeeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(StoreEmployeeRequest $request, \App\Creators\Employees\Employee $employeeCreator)
     {
         $newEmployee = $employeeCreator->storeModel($request->validated());
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
                     'msg' => 'Your employee is saved',
@@ -51,8 +53,8 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return Response
      */
     public function show(Employee $employee)
     {
@@ -62,8 +64,8 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return Response
      */
     public function edit(Employee $employee)
     {
@@ -73,14 +75,14 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Employee $employee
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @param Request $request
+     * @param Employee $employee
+     * @return Response
+     * @throws Exception
      */
     public function update(int $id, StoreEmployeeRequest $request, \App\Creators\Employees\Employee $employeeCreator)
     {
-        $updatedEmployee = $employeeCreator->updateByReference($id, $request->validated() );
+        $updatedEmployee = $employeeCreator->updateByReference($id, $request->validated());
         if ($request->wantsJson()) {
             return response()->json([
                 'msg' => 'Your employee is updated!',
@@ -93,13 +95,13 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
+     * @param Employee $employee
+     * @return Response
      */
     public function destroy(int $id, Request $request, \App\Creators\Employees\Employee $employeeCreator)
     {
         $employeeCreator->destroyModel($id);
-        if($request->wantsJson()) {
+        if ($request->wantsJson()) {
             return response()->json([
                 'msg' => 'Your employee is now destroyed !'
             ]);

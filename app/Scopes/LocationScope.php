@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Scopes;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -21,4 +22,4 @@ class LocationScope implements Scope
     // {
     //    $builder->where('location_id', $this->locationId);
     // }
-};
+}

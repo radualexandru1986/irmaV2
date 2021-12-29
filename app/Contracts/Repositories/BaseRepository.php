@@ -9,7 +9,7 @@ interface BaseRepository
     /**
      * @return mixed
      */
-    function all() :Collection;
+    function all(): Collection;
 
     function storeModel();
 

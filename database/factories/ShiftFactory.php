@@ -24,7 +24,8 @@ class ShiftFactory extends Factory
         return [
             'name' => $this->faker->colorName,
             'hours' => 12,
-            'department_id' => 1
+            'department_id' => 1,
+            'index' => 1
         ];
     }
 }

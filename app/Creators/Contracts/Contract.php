@@ -10,8 +10,8 @@ class Contract extends BaseCreator
     /**
      * @param ContractRepository $contract
      */
-        public function __construct(ContractRepository $contract)
-        {
-            $this->modelRepository = $contract;
-        }
+    public function __construct(ContractRepository $contract)
+    {
+        $this->modelRepository = $contract;
+    }
 }

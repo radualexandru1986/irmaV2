@@ -6,6 +6,7 @@ use App\Contracts\Repositories\Containers\Container;
 use App\Contracts\Repositories\Contracts\Contract;
 use App\Contracts\Repositories\Departments\Department;
 use App\Contracts\Repositories\Employees\Employee;
+use App\Contracts\Repositories\Shifts\Shift;
 use App\Contracts\Repositories\Users\User;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +27,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->bindContainers();
         $this->bindContracts();
         $this->bindEmployees();
+        $this->bindShifts();
     }
 
     /**
@@ -62,5 +64,10 @@ class RepositoryServiceProvider extends ServiceProvider
     public function bindEmployees()
     {
         $this->app->bind(Employee::class, \App\Repositories\Employees\Employee::class);
+    }
+
+    public function bindShifts()
+    {
+        $this->app->bind(Shift::class, \App\Repositories\Shifts\Shift::class);
     }
 }

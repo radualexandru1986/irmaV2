@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDepartmentRequest;
+use Exception;
 use Illuminate\Http\Request;
 use App\Creators\Departments\Department;
 use Illuminate\Http\Response;
@@ -42,17 +43,17 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
-    public function store(Department $department, StoreDepartmentRequest $request ): mixed
+    public function store(Department $department, StoreDepartmentRequest $request): mixed
     {
         $newDepartment = $department->storeModel($request->validated());
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
-                    'msg'=>'The department is saved!',
+                    'msg' => 'The department is saved!',
                     'department' => $newDepartment->id
                 ]
             );
@@ -93,11 +94,11 @@ class DepartmentController extends Controller
     public function update($id, StoreDepartmentRequest $request, Department $department): mixed
     {
         $updatedDepartment = $department->updateByReference($id, $request->validated());
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
-                    'msg'=>'The department details are saved!',
-                    'department'=>$updatedDepartment->id
+                    'msg' => 'The department details are saved!',
+                    'department' => $updatedDepartment->id
                 ]
             );
         }
@@ -116,7 +117,7 @@ class DepartmentController extends Controller
     {
         $result = $department->destroyModel($id);
         if ($result) {
-            if($request->wantsJson()) {
+            if ($request->wantsJson()) {
                 return response()->json(
                     [
                         'msg' => 'The department was deleted!'

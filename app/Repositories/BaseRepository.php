@@ -26,7 +26,7 @@ abstract class BaseRepository implements BaseRepoInterface
      */
     function storeModel(): mixed
     {
-        return  $this->model->create($this->modelTemplate);
+        return $this->model->create($this->modelTemplate);
     }
 
     /**
@@ -34,7 +34,7 @@ abstract class BaseRepository implements BaseRepoInterface
      * @param array $data
      * @return $this
      */
-    function updateByReference(int $modelId, array $data):mixed
+    function updateByReference(int $modelId, array $data): mixed
     {
         $updatedModel = $this->model->findOrFail($modelId);
         $updatedModel->update($data);

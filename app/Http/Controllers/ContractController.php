@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContractRequest;
 use App\Models\Contract;
+use Exception;
 use Illuminate\Http\Request;
 use App\Creators\Contracts\Contract as ContractCreator;
+use Illuminate\Http\Response;
 
 class ContractController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -22,7 +24,7 @@ class ContractController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -32,16 +34,16 @@ class ContractController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(StoreContractRequest $request, ContractCreator $contract): mixed
     {
         $newContract = $contract->storeModel($request->validated());
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
-                    'msg'=>'Your contract is saved!',
+                    'msg' => 'Your contract is saved!',
                     'contract' => $newContract->id
                 ]
             );
@@ -53,8 +55,8 @@ class ContractController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Contract  $contract
-     * @return \Illuminate\Http\Response
+     * @param Contract $contract
+     * @return Response
      */
     public function show(Contract $contract)
     {
@@ -64,8 +66,8 @@ class ContractController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Contract  $contract
-     * @return \Illuminate\Http\Response
+     * @param Contract $contract
+     * @return Response
      */
     public function edit(Contract $contract)
     {
@@ -78,16 +80,16 @@ class ContractController extends Controller
      * @param $id
      * @param StoreContractRequest $request
      * @param ContractCreator $contractCreator
-     * @return \Illuminate\Http\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
     public function update($id, StoreContractRequest $request, ContractCreator $contractCreator): mixed
     {
         $updatedContract = $contractCreator->updateByReference($id, $request->validated());
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
-                    'msg'=>'Your contract is updated!',
+                    'msg' => 'Your contract is updated!',
                     'contract' => $updatedContract->id
                 ]
             );
@@ -99,17 +101,17 @@ class ContractController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Contract  $contract
-     * @return \Illuminate\Http\Response
+     * @param Contract $contract
+     * @return Response
      */
-    public function destroy(int $id, ContractCreator $contract, Request $request):mixed
+    public function destroy(int $id, ContractCreator $contract, Request $request): mixed
     {
         $contract->destroyModel($id);
 
-        if ($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
-                    'msg'=>'The contract is now destroyed!'
+                    'msg' => 'The contract is now destroyed!'
                 ]
             );
         }

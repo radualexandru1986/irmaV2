@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Shift;
 use App\Models\Employee;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Container extends Model
 {
     use HasFactory;
 
     protected $table = 'containers';
-    protected $primaryKey ='id';
+    protected $primaryKey = 'id';
     protected $fillable = ['container_date', 'rota_id'];
 
 //    == Relations ==
@@ -20,7 +22,7 @@ class Container extends Model
     /**
      * Gets the Rota model
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function rota()
     {
@@ -30,7 +32,7 @@ class Container extends Model
     /**
      * Gets the shifts associated with this Container
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
     public function shifts()
     {

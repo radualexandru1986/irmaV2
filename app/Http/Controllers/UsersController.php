@@ -8,7 +8,9 @@ use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UsersController extends Controller
 {
@@ -36,7 +38,7 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,10 +59,10 @@ class UsersController extends Controller
     public function store(User $user, StoreUserRequest $request): mixed
     {
         $newUser = $user->storeModel($request->validated());
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
-                    'msg'=>'Well Done',
+                    'msg' => 'Well Done',
                     'user' => $newUser->id
                 ]
             );
@@ -71,8 +73,8 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -82,8 +84,8 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function edit($id)
     {
@@ -93,19 +95,19 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @throws Exception
      */
-    public function update(int $id, StoreUserRequest $request, User $user ): mixed
+    public function update(int $id, StoreUserRequest $request, User $user): mixed
     {
         $updatedUser = $user->updateByReference($id, $request->validated());
-        if($request->wantsJson()){
+        if ($request->wantsJson()) {
             return response()->json(
                 [
-                    'msg'=>'The user details are saved',
-                    'userId'=>$updatedUser->id
+                    'msg' => 'The user details are saved',
+                    'userId' => $updatedUser->id
                 ]
             );
         }
@@ -118,14 +120,14 @@ class UsersController extends Controller
      * @param int $id
      * @param User $user
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      * @throws Exception
      */
     public function destroy(int $id, User $user, Request $request): mixed
     {
         $result = $user->destroyModel($id);
         if ($result) {
-            if($request->wantsJson()) {
+            if ($request->wantsJson()) {
                 return response()->json(
                     [
                         'msg' => 'The user was deleted'
