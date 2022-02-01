@@ -37,7 +37,7 @@ class UsersController extends Controller
     {
         //$users =  UserModel::with(['employee', 'employee.department'])->get();
         $users = UserModel::with('employee')
-            ->get()
+            ->paginate(20)
             ->loadMorph('employee', [
                 Department::class => ['department'],
                 Contract::class => ['contract']

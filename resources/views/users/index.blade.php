@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container-flex">
-        <h1 class="display-4 w-auto">Users</h1>
+    <div class="container-fluid">
+        <h1 class="display-4">Users</h1>
         <hr>
-        <div class="row  ">
+        <div class="row">
             <div class="col-lg-6 col-12">
                 <button class="btn btn-info "> <i class="bi bi-plus-square"></i> Add New User</button>
             </div>
@@ -17,9 +17,9 @@
         </div>
         <div class="row my-3">
             @foreach($users as $user)
-                <div class="col-3">
+                <div class="col-lg-3 col-md-4 p-2">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body w-100">
                             <h5 class="card-title">{{$user->name}}</h5>
                             <p class="card-text">
                                 @if($user->employee)
@@ -31,6 +31,9 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+        <div class="footer row">
+            {{$users->links()}}
         </div>
         </div>
 @endsection

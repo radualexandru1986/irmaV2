@@ -19,6 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('contract_id');
             $table->timestamps();
+            $table->index(['id', 'user_id']);
         });
     }
 

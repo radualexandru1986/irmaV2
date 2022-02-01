@@ -16,6 +16,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-       User::factory(10)->has(Employee::factory()->count(1))->create();
+        $this->command->getOutput()->progressStart(10);
+       User::factory(40)->has(Employee::factory()->count(1))->create();
+       $this->command->getOutput()->progressFinish();
     }
 }

@@ -30,5 +30,8 @@
                 </div>
             @endforeach
         </div>
+        <div class="footer row">
+            {{$employees->links()}}
+        </div>
     </div>
 @endsection
