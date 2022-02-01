@@ -3,11 +3,6 @@
 .left-bar {
     font-family: "Lato", sans-serif;
     background:linear-gradient(180deg, rgba(38,109,232,1) 0%, rgba(119,42,208,1) 100%);
-    min-width: 10%;
-    max-width:20%;
-    width: auto;
-    min-height:95vh;
-    height: auto;
     color:white;
     a{
        text-decoration:none!important;
@@ -17,13 +12,9 @@
         .bi{
             color:$light;
         }
-        width: 100%;
-        font-size:18px;
-        display: flex;
-        flex-direction: row;
+        display:flex;
         justify-content: space-between;
-        align-items: center;
-        cursor:pointer;
+        font-size:18px;
         transition-duration: 300ms;
         &:hover{
             background:$indigo;

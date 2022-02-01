@@ -11,13 +11,12 @@ use Illuminate\Http\Response;
 class EmployeeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        //
+        $employees  = Employee::with(['user', 'department', 'contract'])->get();
+        return view('employees.index', ['employees' => $employees]);
     }
 
     /**

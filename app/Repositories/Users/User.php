@@ -29,6 +29,7 @@ class User extends BaseRepository implements UserInterface
             'role_id' => $data['role_id'],
             'name' => $data['name'],
             'email' => $data['email'],
+            'telephone' => $data['telephone'],
             'password' => Hash::make($data['password'])
         ];
 

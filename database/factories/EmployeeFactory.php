@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Contract;
+use App\Models\Department;
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EmployeeFactory extends Factory
@@ -22,9 +25,9 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         return [
-            'contract_id'=>1,
-            'department_id'=>1,
-            'user_id'=>1,
+            'contract_id'=>rand(1,3),
+            'department_id'=>rand(1,4),
+            'user_id'=>User::factory(),
         ];
     }
 }

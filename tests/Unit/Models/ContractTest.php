@@ -24,10 +24,13 @@ class ContractTest extends TestCase
       $this->assertEquals(12, $contract->hours);
   }
 
+    /**
+     * @test
+     */
   public function test_relation()
   {
       $contract  = Contract::create(['name'=>'Contract','hours'=>12]);
-      $employees = Employee::factory()->count(10)->create();
+      $employees = Employee::factory()->count(10)->create(['contract_id' => $contract->id]);
 
 
       //testing the relation contract -> employees via employees()

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Creators\Users\User;
+use App\Models\Contract;
+use App\Models\Department;
+use App\Models\User as UserModel;
 use App\Http\Requests\StoreUserRequest;
 use Exception;
 use Illuminate\Contracts\Foundation\Application;
@@ -32,7 +35,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        //$users =  UserModel::with(['employee', 'employee.department'])->get();
+        $users = UserModel::with('employee')
+            ->get()
+            ->loadMorph('employee', [
+                Department::class => ['department'],
+                Contract::class => ['contract']
+            ]);
+        return view('users.index', ['users'=>$users]);
     }
 
     /**

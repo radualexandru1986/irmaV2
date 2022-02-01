@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
+use App\Models\Employee;
 use Illuminate\Database\Seeder;
 
 class DepartmentSeeder extends Seeder
@@ -13,6 +15,6 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Department::factory()->count(4)->create();
     }
 }

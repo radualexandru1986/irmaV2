@@ -32,6 +32,7 @@ class UserTest extends TestCase
             'role_id' => '1',
             'name'=> 'Test',
             'email'=>'email@gmail.com',
+            'telephone' => '12345678911',
             'password' => '1234'
         ]);
 
@@ -50,6 +51,7 @@ class UserTest extends TestCase
             'role_id' => '1',
             'name'=> 'Test',
             'email'=>'email@gmail.com',
+            'telephone' => '12345678911',
             'password' => '1234'
         ]);
 
@@ -72,6 +74,7 @@ class UserTest extends TestCase
             'role_id' => '1',
             'name'=> 'Test2',
             'email'=>'email@gmail.com',
+            'telephone' => '12345678911',
             'password' => '1234'
         ]);
         $u = User::all();
@@ -91,6 +94,7 @@ class UserTest extends TestCase
             'role_id' => '1',
             'name'=> 'Test2',
             'email'=>'email@gmail.com',
+            'telephone' => '12345678911',
             'password' => '1234'
         ]);
         $u = User::all();

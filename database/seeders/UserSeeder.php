@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,8 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'admin',
-        ]);
+       User::factory(10)->has(Employee::factory()->count(1))->create();
     }
 }

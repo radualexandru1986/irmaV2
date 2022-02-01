@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\Role;
 use App\Models\UserAddress;
@@ -32,11 +33,13 @@ class UserTest extends TestCase
      */
     public function itHasAdminRole()
     {
-        $user = User::factory()->create();
-
         $role = Role::factory()->create();
 
+        $user = User::factory()->create(['role_id'=> $role->id]);
+
         $this->assertEquals('admin', $user->first()->role->name);
+
+        //testing the relations
         $this->assertEquals($user->role->toArray(), $role->toArray());
     }
 
@@ -101,4 +104,14 @@ class UserTest extends TestCase
         $this->assertEquals($user->employee->toArray(), $employee->toArray());
 
     }
+
+    /**
+     *
+     * @test
+     */
+//    public function itVerifiesUserEmployerDepartmentLongRelation()
+//    {
+//        $user =
+//        $this->assertTrue($user);
+//    }
 }

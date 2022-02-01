@@ -20,15 +20,15 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    @if(\Illuminate\Support\Facades\Auth::user())
-        @include('layouts.navbar')
-    @endif
-    <div class="container-flex">
-        <div class="row m-0 p-0">
-            @include('layouts.left-bar')
-            <div class="mx-auto" style=" min-width:80%; max-width:90%; width: auto" id="app">
-                @yield('content')
-            </div>
+    <div class="row m-0 p-0">
+        @if(\Illuminate\Support\Facades\Auth::user())
+            @include('layouts.navbar')
+        @endif
+    </div>
+    <div class="row m-0 p-0">
+        @include('layouts.left-bar')
+        <div class="col-12 mx-auto" id="app">
+            @yield('content')
         </div>
     </div>
     @stack('scripts')
