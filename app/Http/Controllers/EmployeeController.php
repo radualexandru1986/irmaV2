@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Creators\Users\User;
 use App\Http\Requests\StoreEmployeeRequest;
+use App\Models\Contract;
+use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Role;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -11,12 +15,17 @@ use Illuminate\Http\Response;
 class EmployeeController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return
      */
     public function index()
     {
-        $employees  = Employee::with(['user', 'department', 'contract'])->paginate(20);
-        return view('employees.index', ['employees' => $employees, ]);
+        $employees  = Employee::with(['user', 'department', 'contract'])->get();
+        return view('employees.index', [
+            'contracts' => Contract::all(),
+            'departments' => Department::all(),
+            'roles' => Role::all(),
+            'employees' => $employees,
+            ]);
     }
 
     /**
@@ -35,9 +44,10 @@ class EmployeeController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(StoreEmployeeRequest $request, \App\Creators\Employees\Employee $employeeCreator)
+    public function store(StoreEmployeeRequest $request, \App\Creators\Employees\Employee $employeeCreator, User $userCreator)
     {
         $newEmployee = $employeeCreator->storeModel($request->validated());
+
         if ($request->wantsJson()) {
             return response()->json(
                 [
@@ -53,11 +63,14 @@ class EmployeeController extends Controller
      * Display the specified resource.
      *
      * @param Employee $employee
-     * @return Response
      */
     public function show(Employee $employee)
     {
-        //
+        return view('employees.viewEmployee', [
+            'employee'=> $employee,
+            'departments'=>Department::all(),
+            'contracts'=>Contract::all()
+        ]);
     }
 
     /**

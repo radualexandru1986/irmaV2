@@ -18,6 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('contract_id');
+            $table->boolean('active')->default(1)->nullable();
             $table->timestamps();
             $table->index(['id', 'user_id']);
         });

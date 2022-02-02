@@ -52,4 +52,12 @@ class Employee extends Model
         return $this->belongsTo('\App\Models\Department', 'department_id');
     }
 
+    /**
+     * @return string
+     */
+    public function getActiveAttribute(int $value): string
+    {
+        return $value == 1 ? 'Active' : 'Disabled';
+    }
+
 }

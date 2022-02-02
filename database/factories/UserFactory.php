@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'telephone'=>$this->faker->phoneNumber,
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
-            'role_id' => Role::factory()
+            'role_id' => rand(1,3)
         ];
     }
 

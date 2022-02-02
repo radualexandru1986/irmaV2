@@ -15,19 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 //These are the auth routes
-Route::group([
-    'middleware' => 'api'
-    ], function ($router) {
-    Route::post('auth/login', [AuthController::class, 'login']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::post('me', [AuthController::class, 'me']);
-});
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout']);
+Route::post('refresh', [AuthController::class, 'refresh']);
+Route::post('me', [AuthController::class, 'me']);
 
 
-//The service routes
-Route::group([
-    'middleware' => 'api'
-], function(){
-
+Route::get('xxx', function(){
+   return 'api ready';
 });

@@ -88,6 +88,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Role::class);
     }
 
+    /**
+     * Gets the string role.
+     */
+    public function getRole()
+    {
+        return $this->role->name;
+    }
+
 
     /**
      * Global scope.
