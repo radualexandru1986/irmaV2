@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Alex',
+            'name' => 'admin',
             'email' => 'radu.c.alexandru@gmail.com',
             'telephone'=> '01234567890',
-            'password' => Hash::make('pulamea123'),
+            'password' => Hash::make('1234'),
             'role_id' => 1
         ]);
         $this->call([
