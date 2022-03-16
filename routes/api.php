@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//These are the auth routes
-Route::post('auth/login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout']);
-Route::post('refresh', [AuthController::class, 'refresh']);
-Route::post('me', [AuthController::class, 'me']);
+Route::post('/auth/login', function (Request $request) {
 
+    $request->validate([
+        'email' => 'required' | 'email',
+        'password' =>'required',
+    ]);
+    $user = User::where('email', $request->email)->first();
 
-Route::get('xxx', function(){
-   return 'api ready';
+    if (! $user || ! Hash::check($request->password, $user->password)) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+    return 'x';
+    return  $user->createToken('oxi')->plainTextToken;
+
 });
+

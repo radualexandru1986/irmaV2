@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'admin',
-            'email' => 'admin@test.com',
+            'email' => 'admin@mail.com',
             'telephone'=> '01234567890',
             'password' => Hash::make('1234'),
             'role_id' => 1
