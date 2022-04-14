@@ -1,36 +1,19 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "Api" middleware group. Enjoy building your API!
-|
-*/
+/**
+ * Authenticating the app with Sanctum.
+ * This method works for all apps. Is just a basic authentication method.
+ * @todo add Laravel Passport as a more secure way to authenticate
+ */
+Route::post('/auth/login', [AuthController::class, 'login']);
 
-Route::post('/auth/login', function (Request $request) {
-
-    $request->validate([
-        'email' => 'required' | 'email',
-        'password' =>'required',
-    ]);
-    $user = User::where('email', $request->email)->first();
-
-    if (! $user || ! Hash::check($request->password, $user->password)) {
-        throw \Illuminate\Validation\ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
-        ]);
-    }
-    return 'x';
-    return  $user->createToken('oxi')->plainTextToken;
-
+/**
+ * A route to test Sanctum's authentication and  token abilities
+ */
+Route::middleware('auth:sanctum')->get('/test', function(Request $request){
+   return $request->user();
 });
-
